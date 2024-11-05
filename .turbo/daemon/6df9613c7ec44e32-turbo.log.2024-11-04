@@ -1,0 +1,15 @@
+2024-11-04T18:22:01.244506Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2024-11-04T19:10:49.926833Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2024-11-04T19:10:50.557866Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages\\db")}
+2024-11-04T19:10:50.558230Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/db"), path: AnchoredSystemPathBuf("packages\\db") }: FileChanged { file: AnchoredSystemPathBuf("packages\\db") }}))
+2024-11-04T19:10:54.445504Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages\\db\\tsconfig.tsbuildinfo"), AnchoredSystemPathBuf("packages\\db")}
+2024-11-04T19:10:54.445536Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/db"), path: AnchoredSystemPathBuf("packages\\db") }: FileChanged { file: AnchoredSystemPathBuf("packages\\db\\tsconfig.tsbuildinfo") }}))
+2024-11-04T19:11:42.156623Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\http\\src\\routes\\v1\\index.ts")}
+2024-11-04T19:11:42.157714Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("http"), path: AnchoredSystemPathBuf("apps\\http") }: FileChanged { file: AnchoredSystemPathBuf("apps\\http\\src\\routes\\v1\\index.ts") }}))
+2024-11-04T19:11:44.446424Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\http\\src\\routes\\v1\\index.ts")}
+2024-11-04T19:11:44.446458Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("http"), path: AnchoredSystemPathBuf("apps\\http") }: FileChanged { file: AnchoredSystemPathBuf("apps\\http\\src\\routes\\v1\\index.ts") }}))
+2024-11-04T19:12:34.549279Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\http\\src\\routes\\v1\\index.ts")}
+2024-11-04T19:12:34.549315Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("http"), path: AnchoredSystemPathBuf("apps\\http") }: FileChanged { file: AnchoredSystemPathBuf("apps\\http\\src\\routes\\v1\\index.ts") }}))
+2024-11-04T19:13:08.614201Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2024-11-04T19:14:57.425313Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\http\\src\\types\\index.ts")}
+2024-11-04T19:14:57.425442Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("http"), path: AnchoredSystemPathBuf("apps\\http") }: FileChanged { file: AnchoredSystemPathBuf("apps\\http\\src\\types\\index.ts") }}))
