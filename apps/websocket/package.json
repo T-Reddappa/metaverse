@@ -1,8 +1,8 @@
 {
-  "name": "ws",
+  "name": "websocket",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "npx esbuild src/index.ts --bundle --outfile=dist/index.js --platform=node --tsconfig=tsconfig.json",
     "start": "node dist/index.js",
@@ -12,8 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@repo/db": "*",
     "@types/jsonwebtoken": "^9.0.7",
+    "esbuild": "^0.24.0",
+    "jsonwebtoken": "^9.0.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
     "@types/ws": "^8.5.13",
-    "jsonwebtoken": "^9.0.2"
+    "typescript": "^5.6.3"
   }
 }

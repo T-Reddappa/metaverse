@@ -65,7 +65,7 @@ adminRouter.post("/avatar", async (req, res) => {
   res.json({ avatarId: avatar.id });
 });
 
-adminRouter.get("/:map", async (req, res) => {
+adminRouter.post("/map", async (req, res) => {
   const parsedData = CreateMapSchema.safeParse(req.body);
   if (!parsedData.success) {
     res.status(400).json({ message: "Validation failed" });
@@ -87,7 +87,7 @@ adminRouter.get("/:map", async (req, res) => {
       },
     },
   });
-
+  console.log("map from admin.ts 90", map);
   res.json({
     id: map.id,
   });

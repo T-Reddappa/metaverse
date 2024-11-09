@@ -1,5 +1,5 @@
-import type { User } from "./User";
-import { OutgoingMessage } from "./types";
+import type { User } from "./User.js";
+import { OutgoingMessage } from "./types.js";
 
 export class RoomManager {
   rooms: Map<string, User[]> = new Map();
@@ -20,7 +20,6 @@ export class RoomManager {
     if (!this.rooms.has(spaceId)) {
       return;
     }
-    // this.rooms.set(spaceId, (this.rooms.get(spaceId)?.filter((u) => u.id !== user.id) ?? []));
     this.rooms.set(
       spaceId,
       this.rooms.get(spaceId)?.filter((u) => u.id !== user.id) ?? []
