@@ -88,125 +88,76 @@ spaceRouter.get("/all", userMiddleware, async (req, res) => {
   });
 });
 
-spaceRouter.post("/element", userMiddleware, async (req, res) => {
-  try {
-    const parsedData = AddElementSchema.safeParse(req.body);
-    console.log("Parsed Data:", parsedData);
-
-    if (!parsedData.success) {
-      res.status(400).json({
-        message: "Validation failed",
-        errors: parsedData.error.errors,
-      });
-      return;
-    }
-
-    // Find the user's space
-    const space = await client.space.findUnique({
-      where: {
-        id: parsedData.data.spaceId,
-        creatorId: req.userId!,
-      },
-      select: {
-        width: true,
-        height: true,
-      },
-    });
-
-    if (!space) {
-      res.status(400).json({ message: "Space not found" });
-      return;
-    }
-
-    // Check if the point is within the boundary
-    if (
-      parsedData.data.x < 0 ||
-      parsedData.data.y < 0 ||
-      parsedData.data.x >= space.width! || // Adjusted boundary check
-      parsedData.data.y >= space.height! // Adjusted boundary check
-    ) {
-      res.status(400).json({ message: "Point is outside of the boundary" });
-      return;
-    }
-
-    // Create the space element
-    const newElement = await client.spaceElements.create({
-      data: {
-        spaceId: parsedData.data.spaceId,
-        elementId: parsedData.data.elementId,
-        x: parsedData.data.x,
-        y: parsedData.data.y,
-      },
-    });
-
-    res.json({
-      message: "Element added successfully",
-      elementId: newElement.id,
-    });
-  } catch (error) {
-    console.error("Error adding element:", error);
-    res.status(500).json({ message: "An unexpected error occurred" });
-  }
-});
-
 // spaceRouter.post("/element", userMiddleware, async (req, res) => {
-//   const parsedData = AddElementSchema.safeParse(req.body);
-//   console.log(parsedData);
-//   if (!parsedData.success) {
-//     res.status(400).json({ message: "Validation failed" });
-//     return;
+//   try {
+//     const parsedData = AddElementSchema.safeParse(req.body);
+//     console.log("Parsed Data:", parsedData);
+
+//     if (!parsedData.success) {
+//       res.status(400).json({
+//         message: "Validation failed",
+//         errors: parsedData.error.errors,
+//       });
+//       return;
+//     }
+
+//     // Find the user's space
+//     const space = await client.space.findUnique({
+//       where: {
+//         id: parsedData.data.spaceId,
+//         creatorId: req.userId!,
+//       },
+//       select: {
+//         width: true,
+//         height: true,
+//       },
+//     });
+
+//     if (!space) {
+//       res.status(400).json({ message: "Space not found" });
+//       return;
+//     }
+
+//     // Check if the point is within the boundary
+//     if (
+//       parsedData.data.x < 0 ||
+//       parsedData.data.y < 0 ||
+//       parsedData.data.x >= space.width! || // Adjusted boundary check
+//       parsedData.data.y >= space.height! // Adjusted boundary check
+//     ) {
+//       res.status(400).json({ message: "Point is outside of the boundary" });
+//       return;
+//     }
+
+//     // Create the space element
+//     const newElement = await client.spaceElements.create({
+//       data: {
+//         spaceId: parsedData.data.spaceId,
+//         elementId: parsedData.data.elementId,
+//         x: parsedData.data.x,
+//         y: parsedData.data.y,
+//       },
+//     });
+
+//     // res.json({
+//     //   message: "Element added successfully",
+//     //   elementId: newElement.id,
+//     // });
+//   } catch (error) {
+//     console.error("Error adding element:", error);
+//     res.status(500).json({ message: "An unexpected error occurred" });
 //   }
-
-//   //find the user space
-//   const space = await client.space.findUnique({
-//     where: {
-//       id: parsedData.data.spaceId,
-//       creatorId: req.userId!,
-//     },
-//     select: {
-//       width: true,
-//       height: true,
-//     },
-//   });
-
-//   if (!space) {
-//     res.status(400).json({ message: "Space not found" });
-//     return;
-//   }
-
-//   if (
-//     parsedData.data.x < 0 ||
-//     parsedData.data.y < 0 ||
-//     parsedData.data.x > space?.width! ||
-//     parsedData.data.y > space?.height!
-//   ) {
-//     res.status(400).json({ message: "Point is outside of the boundary" });
-//     return;
-//   }
-
-//   await client.spaceElements.create({
-//     data: {
-//       spaceId: parsedData.data.spaceId,
-//       elementId: parsedData.data.elementId,
-//       x: parsedData.data.x,
-//       y: parsedData.data.y,
-//     },
-//   });
 // });
 
-spaceRouter.delete("/element", userMiddleware, async (req, res) => {
+spaceRouter.post("/element", userMiddleware, async (req, res) => {
   const parsedData = AddElementSchema.safeParse(req.body);
-  console.log("Parsed Data:", parsedData);
-
+  console.log(parsedData);
   if (!parsedData.success) {
-    res.status(400).json({
-      message: "Validation failed",
-      errors: parsedData.error.errors,
-    });
+    res.status(400).json({ message: "Validation failed" });
     return;
   }
 
-  // Find the user's space
+  //find the user space
   const space = await client.space.findUnique({
     where: {
       id: parsedData.data.spaceId,
@@ -223,19 +174,17 @@ spaceRouter.delete("/element", userMiddleware, async (req, res) => {
     return;
   }
 
-  // Check if the point is within the boundary
   if (
     parsedData.data.x < 0 ||
     parsedData.data.y < 0 ||
-    parsedData.data.x >= space.width! || // Adjusted boundary check
-    parsedData.data.y >= space.height! // Adjusted boundary check
+    parsedData.data.x > space?.width! ||
+    parsedData.data.y > space?.height!
   ) {
     res.status(400).json({ message: "Point is outside of the boundary" });
     return;
   }
 
-  // Create the space element
-  const newElement = await client.spaceElements.create({
+  await client.spaceElements.create({
     data: {
       spaceId: parsedData.data.spaceId,
       elementId: parsedData.data.elementId,
@@ -243,10 +192,40 @@ spaceRouter.delete("/element", userMiddleware, async (req, res) => {
       y: parsedData.data.y,
     },
   });
+  res.json({ message: "Element added" });
+});
 
-  res.json({
-    message: "Element added successfully",
+spaceRouter.delete("/element", userMiddleware, async (req, res) => {
+  const parsedData = DeleteElementSchema.safeParse(req.body);
+  if (!parsedData.success) {
+    res.status(400).json({ message: "Validation failed" });
+    return;
+  }
+
+  const spaceElement = await client.spaceElements.findFirst({
+    where: {
+      id: parsedData.data.id,
+    },
+    include: {
+      space: true,
+    },
   });
+
+  if (
+    !spaceElement?.space.creatorId ||
+    spaceElement.space.creatorId !== req.userId
+  ) {
+    res.status(403).json({ message: "Unauthorized" });
+    return;
+  }
+
+  await client.spaceElements.delete({
+    where: {
+      id: parsedData.data.id,
+    },
+  });
+
+  res.json({ message: "Element deleted" });
 });
 
 spaceRouter.get("/:spaceId", async (req: Request, res) => {

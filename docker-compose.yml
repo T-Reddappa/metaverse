@@ -1,0 +1,20 @@
+services:
+  http:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: http
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    ports:
+      - "3000:3000"
+
+  websocket:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: websocket
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    ports:
+      - "3001:3001"
